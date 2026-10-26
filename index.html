@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GRAN RALLY RACING</title></head>
+<body style="margin:0;background:#000;color:#fff;font:600 16px Arial,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;text-align:center;padding:0 16px;box-sizing:border-box">
+<div id="l">LOADING… <span id="p"></span></div>
+<script>
+(async()=>{const n=3,l=document.getElementById('l');let cur='';
+try{let t='';
+for(let i=1;i<=n;i++){
+ let r=null;
+ for(const u of ['part'+i+'.txt','parts/part'+i+'.txt']){cur=u;try{const x=await fetch(u);if(x.ok){r=x;break}cur+=' → HTTP '+x.status}catch(e){cur+=' → '+e.message}}
+ if(!r)throw new Error('Cannot find part'+i+'.txt ('+cur+')');
+ t+=await r.text();document.getElementById('p').textContent=i+'/'+n}
+document.open();document.write(t);document.close()}
+catch(e){l.innerHTML='Failed to load game files.<br><small style="font-weight:400;opacity:.8">'+e.message+'</small>'}})();
+</script></body></html>
